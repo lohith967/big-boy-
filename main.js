@@ -27,6 +27,11 @@ scoreRightWrist = 0;
 
 //Define a variable to hold the status of the game
 
+
+function preload(){
+  missed = loadSound("missed.wav");
+  ball_touch = loadSound("ball_touch_paddel.wav");
+}
  
 
 function setup(){
@@ -113,6 +118,16 @@ if(game_status == "start") // inside the if condition check if the game_status i
     //function move call which in very important
     move();
 
+
+
+    if(ball.y >=paddle1&& ball.y<=paddle1+paddle1Height){
+      ball_touch.play();
+
+     
+    }
+    else{
+      missed.play();
+    }
     }
 
   }
@@ -183,7 +198,7 @@ if(pcscore ==4){
     stroke("white");
     textSize(25);
     text("Game Over!",width/2,height/2);
-    text("Reload the page!",width/2,height/2+30)
+    text("Press restart button to restart the game!!",width/2,height/2+30)
     noLoop();
     pcscore = 0;
  }
@@ -214,5 +229,11 @@ function paddleInCanvas(){
   }
  
   
+}
+
+function restart(){
+  pcscore = 0;
+  playerscore = 0;
+  loop();
 }
 
